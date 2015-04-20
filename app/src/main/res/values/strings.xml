@@ -1,0 +1,7 @@
+<resources>
+    <string name="title_activity_main">Picker Screen</string>
+    <string name="app_name">Dragon Battery Widget</string>
+    <string name="action_settings">Settings</string>
+    <string name="show_time">Show Time</string>
+    <string name="show_percent">Show Battery Percent</string>
+</resources>
