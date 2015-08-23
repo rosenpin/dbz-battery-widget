@@ -19,20 +19,17 @@ public class Serivce extends Service {
     SharedPreferences sharedPreferences;
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         super.onCreate();
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
-        new Thread(new Runnable(){
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        new Thread(new Runnable() {
             public void run() {
                 // TODO Auto-generated method stub
-                while(true)
-                {
+                while (true) {
                     try {
                         Thread.sleep(1200);
                         buildUpdate();
@@ -48,58 +45,63 @@ public class Serivce extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void buildUpdate()
-    {
+    private void buildUpdate() {
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.widget_layout);
-        int index = sharedPreferences.getInt("selected",0);
-        int devider = 100/Resources.pics[index].length;
-        int transform = (int) (Resources.getBatteryLevel(getApplicationContext())/devider);
-        if(transform>=Resources.pics[index].length){
-            transform-=1;
+        int index = sharedPreferences.getInt("selected", 0);
+        int[][] pics;
+        if (GT()) {
+            pics = Resources.gt_pics;
+        } else {
+            pics = Resources.pics;
         }
-        if(sharedPreferences.getBoolean("percent",true)){
+        try {
+            int devider = 100 / pics[index].length;
+        } catch (Exception e) {
+            pics = Resources.gt_pics;
+
+        }
+        int devider = 100 / pics[index].length;
+        int transform = (int) (Resources.getBatteryLevel(getApplicationContext()) / devider);
+        if (transform >= pics[index].length) {
+            transform -= 1;
+        }
+        if (sharedPreferences.getBoolean("percent", true)) {
             try {
                 remoteViews.setTextViewTextSize(R.id.percent, 1, 25);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-            catch (Exception e){
-                System.out.println(e);
-            }
-            remoteViews.setViewVisibility(R.id.percent,1);
-            remoteViews.setTextViewText(R.id.percent,String.valueOf((int)(Resources.getBatteryLevel(getApplicationContext()))+"%"));
-        }
-        else{
+            remoteViews.setViewVisibility(R.id.percent, 1);
+            remoteViews.setTextViewText(R.id.percent, String.valueOf((int) (Resources.getBatteryLevel(getApplicationContext())) + "%"));
+        } else {
             try {
                 remoteViews.setTextViewTextSize(R.id.percent, 1, 0);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e);
             }
-            remoteViews.setTextViewText(R.id.percent,"");
+            remoteViews.setTextViewText(R.id.percent, "");
             remoteViews.setViewVisibility(R.id.percent, 0);
         }
-        if(sharedPreferences.getBoolean("time",true)){
+        if (sharedPreferences.getBoolean("time", true)) {
             try {
 
-                remoteViews.setTextViewTextSize(R.id.time,1,25);
-                 }
-            catch (Exception e){
-                 System.out.println(e);
-              }
-            remoteViews.setViewVisibility(R.id.time,1);
+                remoteViews.setTextViewTextSize(R.id.time, 1, 25);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            remoteViews.setViewVisibility(R.id.time, 1);
             String time = new SimpleDateFormat("MM-dd hh:mm").format(new java.util.Date());
-            remoteViews.setTextViewText(R.id.time,time);
+            remoteViews.setTextViewText(R.id.time, time);
+        } else {
+            try {
+                remoteViews.setTextViewTextSize(R.id.time, 1, 0);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            remoteViews.setTextViewText(R.id.time, "");
+            remoteViews.setViewVisibility(R.id.time, 0);
         }
-        else{
-            try{
-            remoteViews.setTextViewTextSize(R.id.time,1,0);
-        }
-        catch (Exception e){
-        System.out.println(e);
-    }
-            remoteViews.setTextViewText(R.id.time,"");
-            remoteViews.setViewVisibility(R.id.time,0);
-        }
-        remoteViews.setImageViewResource(R.id.update,Resources.pics[index][transform]);
+        remoteViews.setImageViewResource(R.id.update, pics[index][transform]);
 
         // Register an onClickListener
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -114,9 +116,12 @@ public class Serivce extends Service {
         manager.updateAppWidget(thisWidget, remoteViews);
     }
 
+    private boolean GT() {
+        return sharedPreferences.getBoolean("gt", false);
+    }
+
     @Override
-    public IBinder onBind(Intent intent)
-    {
+    public IBinder onBind(Intent intent) {
         return null;
     }
 }

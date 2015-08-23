@@ -37,15 +37,8 @@ import com.google.android.gms.ads.AdView;
 public class MainActivity extends ActionBarActivity {
     int position;
     Context context;
-    SharedPreferences sharedPreferences;
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+    static SharedPreferences sharedPreferences;
+
     SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -53,6 +46,7 @@ public class MainActivity extends ActionBarActivity {
      */
 
     ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,18 +68,18 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 sharedPreferences.edit().putInt("selected", position).apply();
-                Toast.makeText(getApplicationContext(),"Charecter selected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Character selected", Toast.LENGTH_SHORT).show();
             }
         });
         toggleCb(R.id.percent_cb, "percent");
-        toggleCb(R.id.time_cb,"time");
+        toggleCb(R.id.time_cb, "time");
+        toggleCb(R.id.gt_cb, "gt");
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(sharedPreferences.getInt("selected",0));
+        mViewPager.setCurrentItem(sharedPreferences.getInt("selected", 0));
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i2) {
-
             }
 
             @Override
@@ -132,7 +126,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public int getCount() {
-            return Resources.pics.length;
+            return PICS().length;
         }
     }
 
@@ -155,18 +149,31 @@ public class MainActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             ImageView img = (ImageView) rootView.findViewById(R.id.exImage);
-            img.setImageResource(Resources.pics[position][0]);
+            img.setImageResource(PICS()[position][0]);
             return rootView;
         }
     }
-    public void toggleCb(int id, final String sp){
+
+    public void toggleCb(int id, final String sp) {
         CheckBox cb = (CheckBox) findViewById(id);
-        cb.setChecked(sharedPreferences.getBoolean(sp,true));
+        cb.setChecked(sharedPreferences.getBoolean(sp, true));
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                sharedPreferences.edit().putBoolean(sp,isChecked).apply();
+                sharedPreferences.edit().putBoolean(sp, isChecked).apply();
+                if(sp.equals("gt")){
+                    finish();
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                }
             }
         });
+    }
+    private static int[][] PICS(){
+        if(sharedPreferences.getBoolean("gt",false)){
+            return Resources.gt_pics;
+        }
+        else{
+            return Resources.pics;
+        }
     }
 }
