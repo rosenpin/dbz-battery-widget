@@ -4,7 +4,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
-        applicationId "com.tomer.dragon.widget"
+        applicationId "com.tomer.dbz.widget"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 3

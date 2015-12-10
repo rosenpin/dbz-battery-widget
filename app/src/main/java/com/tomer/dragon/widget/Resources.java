@@ -1,4 +1,4 @@
-package com.tomer.dragon.widget;
+package com.tomer.dbz.widget;
 
 import android.content.Context;
 import android.content.Intent;

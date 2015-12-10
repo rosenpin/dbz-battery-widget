@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tomer.dragon.widget.MainActivity">
+    tools:context="com.tomer.dbz.widget.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
             android:text="@string/gt_content" />
     </LinearLayout>
 
-    <com.tomer.dragon.widget.CircleButton xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.tomer.dbz.widget.CircleButton xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/circle_but"
         android:layout_width="64dip"
