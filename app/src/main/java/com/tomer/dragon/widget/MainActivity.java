@@ -1,33 +1,22 @@
 package com.tomer.dragon.widget;
 
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -35,10 +24,9 @@ import com.google.android.gms.ads.AdView;
 
 
 public class MainActivity extends ActionBarActivity {
+    static SharedPreferences sharedPreferences;
     int position;
     Context context;
-    static SharedPreferences sharedPreferences;
-
     SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -46,6 +34,14 @@ public class MainActivity extends ActionBarActivity {
      */
 
     ViewPager mViewPager;
+
+    private static int[][] PICS() {
+        if (sharedPreferences.getBoolean("gt", false)) {
+            return Resources.gt_pics;
+        } else {
+            return Resources.pics;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,28 +102,19 @@ public class MainActivity extends ActionBarActivity {
         finish();
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            System.out.println(String.valueOf(position));
-            return new PlaceholderFragment(position);
-        }
-
-        @Override
-        public int getCount() {
-            return PICS().length;
-        }
+    public void toggleCb(int id, final String sp) {
+        CheckBox cb = (CheckBox) findViewById(id);
+        cb.setChecked(sharedPreferences.getBoolean(sp, true));
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                sharedPreferences.edit().putBoolean(sp, isChecked).apply();
+                if (sp.equals("gt")) {
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
+            }
+        });
     }
 
     /**
@@ -154,26 +141,27 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    public void toggleCb(int id, final String sp) {
-        CheckBox cb = (CheckBox) findViewById(id);
-        cb.setChecked(sharedPreferences.getBoolean(sp, true));
-        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                sharedPreferences.edit().putBoolean(sp, isChecked).apply();
-                if(sp.equals("gt")){
-                    finish();
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                }
-            }
-        });
-    }
-    private static int[][] PICS(){
-        if(sharedPreferences.getBoolean("gt",false)){
-            return Resources.gt_pics;
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
-        else{
-            return Resources.pics;
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            System.out.println(String.valueOf(position));
+            return new PlaceholderFragment(position);
+        }
+
+        @Override
+        public int getCount() {
+            return PICS().length;
         }
     }
 }
