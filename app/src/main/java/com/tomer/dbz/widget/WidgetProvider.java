@@ -7,17 +7,12 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 
-/**
- * Created by tomer on 4/18/15.
- */
 public class WidgetProvider extends AppWidgetProvider {
-    private PendingIntent service = null;
-
 
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, final int[] appWidgetIds) {
-        if (!isMyServiceRunning(Serivce.class, context)) {
-            context.startService(new Intent(context, Serivce.class));
+        if (!isMyServiceRunning(UpdaterService.class, context)) {
+            context.startService(new Intent(context, UpdaterService.class));
         }
 
     }

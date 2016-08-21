@@ -13,14 +13,7 @@
 
         android:largeScreens="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.DeviceDefault" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="locked">
@@ -43,9 +36,9 @@
                 android:resource="@xml/widget_info" />
         </receiver>
         <service
-            android:name=".Serivce"
+            android:name=".UpdaterService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
     </application>
 
 </manifest>

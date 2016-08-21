@@ -19,8 +19,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -28,10 +26,6 @@ public class MainActivity extends ActionBarActivity {
     int position;
     Context context;
     SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
 
     ViewPager mViewPager;
 
@@ -47,19 +41,11 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        AdView mAdView = (AdView) findViewById(R.id.ad);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
         context = this;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        CircleButton button = (CircleButton) findViewById(R.id.circle_but);
+        com.tomer.dbz.widget.CircleButton button = (com.tomer.dbz.widget.CircleButton) findViewById(R.id.circle_but);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,9 +103,6 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class PlaceholderFragment extends Fragment {
         int position;
 
@@ -141,10 +124,6 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {

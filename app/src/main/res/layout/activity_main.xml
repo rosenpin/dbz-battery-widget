@@ -32,7 +32,7 @@
 
     <LinearLayout
         android:id="@+id/cb_wrapper"
-        android:layout_above="@+id/ad"
+        android:layout_above="@+id/circle_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -69,12 +69,4 @@
         android:src="@drawable/tick"
         app:cb_color="#99CC00"
         app:cb_pressedRingWidth="8dip" />
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/ad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-9332929961258846/3512767012"></com.google.android.gms.ads.AdView>
 </RelativeLayout>
