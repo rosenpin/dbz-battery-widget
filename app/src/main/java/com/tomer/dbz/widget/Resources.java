@@ -15,7 +15,8 @@ public class Resources {
                     R.drawable.goku_ssj3,
                     R.drawable.goku_ssjg,
                     R.drawable.goku_ssjgss,
-                    R.drawable.goku_ssgss_kaiken
+                    R.drawable.goku_ssgss_kaiken,
+                    R.drawable.goku_limit_breaker
             },
             {
                     R.drawable.vegeta,
@@ -48,6 +49,12 @@ public class Resources {
                     R.drawable.trunks_super
             },
             {
+                    R.drawable.trunks_dbs,
+                    R.drawable.trunks_dbs_ss,
+                    R.drawable.trunks_ss2,
+                    R.drawable.trunks_ssr
+            },
+            {
                     R.drawable.goten,
                     R.drawable.goten_ssj,
                     R.drawable.gotenks,
@@ -70,9 +77,11 @@ public class Resources {
             {
                     R.drawable.vegeto,
                     R.drawable.vegeto_ssj,
-                    R.drawable.vegeto_ssj_mastered
+                    R.drawable.vegeto_ssj_mastered,
+                    R.drawable.vegeto_ssblue
             },
             {
+                    R.drawable.roshi_base,
                     R.drawable.roshi,
                     R.drawable.roshi_perfect
             },
@@ -105,6 +114,24 @@ public class Resources {
                     R.drawable.buu_gotenks,
                     R.drawable.buu_gohan,
                     R.drawable.buu_kid
+            },
+            {
+                    R.drawable.cabba,
+                    R.drawable.cabba_ss
+            },
+            {
+                    R.drawable.caulifla,
+                    R.drawable.caulifla_ss,
+                    R.drawable.caulifla_ss2
+            },
+            {
+                    R.drawable.zamasu,
+                    R.drawable.zamas_fused,
+                    R.drawable.zamas_fused_purple
+            },
+            {
+                    R.drawable.black,
+                    R.drawable.black_rose
             }
     };
 
@@ -148,6 +175,12 @@ public class Resources {
                     R.drawable.trunks_super
             },
             {
+                    R.drawable.trunks_dbs,
+                    R.drawable.trunks_dbs_ss,
+                    R.drawable.trunks_ss2,
+                    R.drawable.trunks_ssr
+            },
+            {
                     R.drawable.goten,
                     R.drawable.goten_ssj,
                     R.drawable.gotenks,
@@ -176,6 +209,7 @@ public class Resources {
                     R.drawable.vegeto_ssj_mastered
             },
             {
+                    R.drawable.roshi_base,
                     R.drawable.roshi,
                     R.drawable.roshi_perfect
             },
@@ -206,6 +240,31 @@ public class Resources {
                     R.drawable.buu_gohan,
                     R.drawable.buu_kid,
                     R.drawable.uub
+            },
+            {
+                    R.drawable.cabba,
+                    R.drawable.cabba_ss
+            },
+            {
+                    R.drawable.caulifla,
+                    R.drawable.caulifla_ss,
+                    R.drawable.caulifla_ss2
+            },
+            {
+                    R.drawable.kale,
+                    R.drawable.kale_ss,
+                    R.drawable.kale_ss_mastered
+            },
+            {
+                    R.drawable.zamasu,
+                    R.drawable.zamas_fused,
+                    R.drawable.zamas_fused_purple
+            },
+            {
+                    R.drawable.black,
+                    R.drawable.black_rose,
+                    R.drawable.zamas_fused,
+                    R.drawable.zamas_fused_purple
             }
     };
 
