@@ -54,6 +54,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/gt_content" />
+        <CheckBox
+            android:id="@+id/white_font"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/white_font" />
     </LinearLayout>
 
     <com.tomer.dbz.widget.CircleButton xmlns:android="http://schemas.android.com/apk/res/android"

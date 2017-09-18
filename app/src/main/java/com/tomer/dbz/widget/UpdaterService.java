@@ -6,11 +6,16 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.provider.AlarmClock;
 import android.widget.RemoteViews;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UpdaterService extends Service {
     SharedPreferences sharedPreferences;
@@ -71,29 +76,42 @@ public class UpdaterService extends Service {
             try {
                 remoteViews.setTextViewTextSize(R.id.percent, 1, 0);
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
             remoteViews.setTextViewText(R.id.percent, "");
             remoteViews.setViewVisibility(R.id.percent, 0);
         }
         if (sharedPreferences.getBoolean("time", true)) {
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Intent intent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+                remoteViews.setOnClickPendingIntent(R.id.time, pendingIntent);
+            }
             try {
 
                 remoteViews.setTextViewTextSize(R.id.time, 1, 25);
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
             remoteViews.setViewVisibility(R.id.time, 1);
-            String time = new SimpleDateFormat("MM-dd hh:mm").format(new java.util.Date());
+            String time = SimpleDateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(new Date());
             remoteViews.setTextViewText(R.id.time, time);
         } else {
             try {
                 remoteViews.setTextViewTextSize(R.id.time, 1, 0);
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
             remoteViews.setTextViewText(R.id.time, "");
             remoteViews.setViewVisibility(R.id.time, 0);
+        }
+        if (sharedPreferences.getBoolean("whitefont", false)) {
+            remoteViews.setTextColor(R.id.time, Color.WHITE);
+            remoteViews.setTextColor(R.id.percent, Color.WHITE);
+        } else {
+            remoteViews.setTextColor(R.id.time, Color.BLACK);
+            remoteViews.setTextColor(R.id.percent, Color.BLACK);
         }
         remoteViews.setImageViewResource(R.id.update, pics[index][transform]);
 

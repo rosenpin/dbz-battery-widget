@@ -56,6 +56,7 @@ public class MainActivity extends ActionBarActivity {
         toggleCb(R.id.percent_cb, "percent");
         toggleCb(R.id.time_cb, "time");
         toggleCb(R.id.gt_cb, "gt");
+        toggleCb(R.id.white_font, "whitefont");
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(sharedPreferences.getInt("selected", 0));
