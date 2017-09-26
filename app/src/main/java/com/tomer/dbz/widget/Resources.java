@@ -8,8 +8,10 @@ import android.os.BatteryManager;
 public class Resources {
     public static final int[][] pics = {
             {
+                    R.drawable.goku_injured,
                     R.drawable.goku,
                     R.drawable.goku_kaikan,
+                    R.drawable.goku_ssj_damaged,
                     R.drawable.goku_ssj,
                     R.drawable.goku_ssj2,
                     R.drawable.goku_ssj3,
@@ -137,8 +139,10 @@ public class Resources {
 
     public static final int[][] gt_pics = {
             {
+                    R.drawable.goku_kid_gt,
                     R.drawable.goku,
                     R.drawable.goku_kaikan,
+                    R.drawable.goku_ssj_damaged,
                     R.drawable.goku_ssj,
                     R.drawable.goku_ssj2,
                     R.drawable.goku_ssj3,
