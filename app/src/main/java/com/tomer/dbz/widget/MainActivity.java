@@ -19,6 +19,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -120,7 +121,7 @@ public class MainActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             ImageView img = (ImageView) rootView.findViewById(R.id.exImage);
-            img.setImageResource(PICS()[position][0]);
+            img.setImageResource(PICS()[position][new Random().nextInt(PICS()[position].length) % 2]);
             return rootView;
         }
     }
@@ -133,8 +134,6 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             System.out.println(String.valueOf(position));
             return new PlaceholderFragment(position);
         }

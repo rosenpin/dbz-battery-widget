@@ -18,6 +18,7 @@ public class Resources {
                     R.drawable.goku_ssjg,
                     R.drawable.goku_ssjgss,
                     R.drawable.goku_ssgss_kaiken,
+                    R.drawable.goku_blue_kaioken,
                     R.drawable.goku_limit_breaker
             },
             {
