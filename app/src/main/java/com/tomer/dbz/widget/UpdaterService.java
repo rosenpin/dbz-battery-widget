@@ -55,15 +55,16 @@ public class UpdaterService extends Service {
             pics = Resources.pics;
         }
         try {
-            int devider = 100 / pics[index].length;
+            int divider = 100 / pics[index].length;
         } catch (Exception e) {
             pics = Resources.gt_pics;
         }
-        int devider = 100 / pics[index].length;
-        int transform = (int) (Resources.getBatteryLevel(getApplicationContext()) / devider);
-        if (transform >= pics[index].length) {
-            transform -= 1;
+        float divider = 100 / pics[index].length;
+        int min_battery = sharedPreferences.getInt("min_battery", 0);
+        if (min_battery > 0) {
+            divider += ((float) min_battery)/ 10f;
         }
+        int transform = (int) (Resources.getBatteryLevel(getApplicationContext()) / divider);
         if (sharedPreferences.getBoolean("percent", true)) {
             try {
                 remoteViews.setTextViewTextSize(R.id.percent, 1, 25);

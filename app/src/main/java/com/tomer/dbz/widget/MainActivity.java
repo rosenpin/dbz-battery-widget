@@ -11,12 +11,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.AppCompatSeekBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -58,6 +60,23 @@ public class MainActivity extends ActionBarActivity {
         toggleCb(R.id.time_cb, "time");
         toggleCb(R.id.gt_cb, "gt");
         toggleCb(R.id.white_font, "whitefont");
+        ((AppCompatSeekBar) findViewById(R.id.min_battery)).setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                sharedPreferences.edit().putInt("min_battery", progress).apply();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        ((AppCompatSeekBar) findViewById(R.id.min_battery)).setProgress(sharedPreferences.getInt("min_battery", 0));
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setCurrentItem(sharedPreferences.getInt("selected", 0));
